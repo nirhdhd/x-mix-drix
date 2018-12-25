@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <meta charset="utf-8" />
+    <title>איקס עיגול</title>
+    <style>
+
+        .cell {
+            height: 150px;
+            width: 150px;
+            background-color: aquamarine;
+            float: left;
+            border: 4px solid black;
+            border-collapse: collapse;
+        }
+
+        body {
+            background-color: cornflowerblue;
+        }
+
+        .bord {
+            width: 500px;
+            height: 700px;
+            margin-left: 33%;
+            margin-top: 6%;
+            margin-top:3px;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+
+        .green {
+            background-color: greenyellow;
+        }
+
+        .pink {
+            background-color: deeppink;
+        }
+        h1 {
+            margin-left: 37%;
+            font-size: 70px;
+            margin-bottom: 0px;
+            text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <!--            javascript            -->
+
+    <script>
+
+        $(document).ready(function () {
+
+            var matrix = [[2, 3, 4], [5, 6, 7], [8, 9, 10]];
+
+            var counter = 0;
+
+
+
+            $(".cell").hover(function () {
+
+
+                $(this).toggleClass("highlight");
+
+            });
+
+
+
+            $(".cell").click(function () {
+                /*  if ($(this).css("background-color") == "rgb(127, 255, 212)")*/
+                if ($(this).css("background-color") == "rgb(255, 255, 0)") {
+                    $(this).off("hover");
+                    if (counter % 2 == 0) {
+                        $(this).removeAttr('background-color');
+                        $(this).addClass("green");
+                        check(this);
+
+                    }
+
+                    else {
+                        $(this).removeAttr('background-color');
+                        $(this).addClass("pink");
+                        check(this);
+                    }
+                    counter++;
+                }
+
+            });
+
+
+            function whatPlayer(e) {
+
+                if ($(e).css("background-color") == "rgb(173, 255, 47)")
+                    return 0;
+                else if ($(e).css("background-color") == "rgb(255, 20, 147)")
+                    return 1;
+                else return Math.floor(Math.random() * 1000) + 2;
+            }
+
+
+
+            function check(e) {
+
+
+                matrix[0][0] = whatPlayer("#00");
+                matrix[0][1] = whatPlayer("#01");
+                matrix[0][2] = whatPlayer("#02");
+                matrix[1][0] = whatPlayer("#10");
+                matrix[1][1] = whatPlayer("#11");
+                matrix[1][ 2] = whatPlayer("#12");
+                matrix[2][ 0] = whatPlayer("#20");
+                matrix[2][ 1] = whatPlayer("#21");
+                matrix[2][ 2] = whatPlayer("#22");
+
+                if (matrix[0][0] == matrix[0][1] && matrix[0][1] == matrix[0][2] ||
+                    matrix[1][0] == matrix[1][1] && matrix[1][1] == matrix[1][2] ||
+                    matrix[2][0] == matrix[2][1] && matrix[2][1] == matrix[2][2] ||
+                    matrix[0][0] == matrix[1][0] && matrix[1][0] == matrix[2][0] ||
+                    matrix[0][1] == matrix[1][1] && matrix[1][1] == matrix[2][1] ||
+                    matrix[0][2] == matrix[1][2] && matrix[1][2] == matrix[2][2] ||
+                    matrix[0][0] == matrix[1][1] && matrix[1][1] == matrix[2][2] ||
+                    matrix[0][2] == matrix[1][1] && matrix[1][1] == matrix[2][0]
+                ) {
+
+
+                    if ($(e).css("background-color") == "rgb(173, 255, 47)")
+                        alert("The green user win!");
+                    else
+                        alert("The pink user win!");
+
+                    location.reload();
+
+                }
+                if (counter == 8) location.reload();
+
+            }
+
+        });
+    </script>
+
+    <head><h1><span style="color:aquamarine;">X-</span><span style="color:greenyellow">Mix-</span><span style="color:deeppink">Drix</span></h1></head>
+
+    <div class="bord">
+
+        <div class="cell" id="00"></div>
+        <div class="cell" id="01"></div>
+        <div class="cell" id="02"></div>
+        <div class="cell" id="10"></div>
+        <div class="cell" id="11"></div>
+        <div class="cell" id="12"></div>
+        <div class="cell" id="20"></div>
+        <div class="cell" id="21"></div>
+        <div class="cell" id="22"></div>
+
+
+
+    </div>
+
+
+
+
+</body>
+</html>
